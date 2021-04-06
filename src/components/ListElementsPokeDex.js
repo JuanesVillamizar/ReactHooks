@@ -18,7 +18,7 @@ export const ListElementsPokeDex = ({element, data}) => {
         <div className='container'>
             <div className="row">
                 <div className="col-12 text-center">
-                    <h3>{names[element.replace('-','_')]} { data.length !== 0 ? 'hay resultados' : 'no hay resultados' }</h3>
+                    <h3>{names[element.replace('-','_')]} { data.length !== 0 ? 'si hay resultados' : 'no hay resultados' }</h3>
                 </div>
                 <div className="col-12">
 

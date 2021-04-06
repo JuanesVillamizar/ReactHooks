@@ -11,14 +11,34 @@ export const HookEffect = () => {
     const [listMovie, setListMovie] = useState([]);
     const [loading, setLoading] = useState(true);
 
-    useEffect( () => {
+    async function fetchData() {
+        if(movie !== ''){
+            let url = `https://www.omdbapi.com/?apikey=${API_KEY}&s=${movie}`;
+            let response = await fetch(url);
+            let data = await response.json();
+            let {Search = []} = data;
+            setListMovie(Search);
+            return true;
+        }
+        return null;
+    }
+
+    const api = () => {
+        if(fetchData() !== null){
+            console.log('OK');
+        }
+    }
+
+    useEffect( api, [movie]);
+
+    /*useEffect( () => {
         fetch(`https://www.omdbapi.com/?apikey=${API_KEY}&s=${movie}`)
             .then(response => response.json())
             .then(results => {
                 let {Search = []} = results
                 setListMovie(Search);
             });
-    }, [movie]);
+    }, [movie]);*/
 
     const _handleChange = () => {
         let {value} = ref.current;

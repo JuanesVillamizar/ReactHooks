@@ -27,12 +27,33 @@ export const PokeDex = () => {
         transition: 'border-color .15s ease-in-out,box-shadow .15s'
     }
 
+    async function fetchData(url){
+        const response = await fetch(url);
+        const data = await response.json();
+        let resultsAPI = data.results;
+        if(resultsAPI.length > 0){
+            resultsAPI = resultsAPI.concat(results);
+            setResults(resultsAPI);
+            console.log(resultsAPI);
+            return 1
+        }
+        return null;
+    }
+
     const _handleChange = (element) => {
+        setCounter(0);
+        setResults([]);
         setType(element.target.value);
     }
 
     const _handleChangeSearch = (element) => {
         setSearch(element.target.value);
+    }
+
+    const api = (url) => {
+        if(fetchData(url) !== null){
+            console.log('OK');
+        }
     }
 
     const _handleClick = async () => {
@@ -43,14 +64,7 @@ export const PokeDex = () => {
         }else{
             url = `https://pokeapi.co/api/v2/${type}/${search}`;
         }
-        fetch(url)
-            .then(response => response.json())
-            .then(data => {
-                let resultsAPI = data.results;
-                results.map( (element) => resultsAPI.push(element));
-                setResults(resultsAPI);
-                console.log(results);
-            });
+        api(url);
     }
 
     return (
