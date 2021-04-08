@@ -6,6 +6,7 @@ export const PokeDex = () => {
     const [search, setSearch] = useState('');
     const [counter, setCounter] = useState(0);
     const [results, setResults] = useState([]);
+    let stylesSearch = {position: 'fixed', backgroundColor: '#f0f0f0', zIndex: 10, top: 0}
 
     const style = {
         position: 'relative',
@@ -31,11 +32,14 @@ export const PokeDex = () => {
         const response = await fetch(url);
         const data = await response.json();
         let resultsAPI = data.results;
-        if(resultsAPI.length > 0){
-            resultsAPI = resultsAPI.concat(results);
-            setResults(resultsAPI);
-            console.log(resultsAPI);
-            return 1
+        if(resultsAPI !== undefined){
+            if(resultsAPI.length > 0){
+                setResults(resultsAPI);
+                return 1
+            }
+        }else{
+            alert('No se encontro ningun elemento que coincida con lo seleccionado');
+            return null;
         }
         return null;
     }
@@ -43,11 +47,13 @@ export const PokeDex = () => {
     const _handleChange = (element) => {
         setCounter(0);
         setResults([]);
-        setType(element.target.value);
+        let search = element.target.value;
+        setType(search.toLowerCase());
     }
 
     const _handleChangeSearch = (element) => {
-        setSearch(element.target.value);
+        let search = element.target.value;
+        setSearch(search.toLowerCase());
     }
 
     const api = (url) => {
@@ -76,12 +82,12 @@ export const PokeDex = () => {
                 <div className="col-12 text-center">
                     <p>Podras buscar por tipo de elemento lo que quieras de pokemon, gracias a la API que hicieron en PokeDex</p>
                 </div>
-                <div className="col-12">
+                <div className="col-12" id='divSearch' style={stylesSearch}>
                     <div className="row my-3">
                         <div className="col-12 col-md-6">
                             <select className="form-select" style={style} id='selectPokeDex' aria-label="Select PokeDex" onChange={_handleChange.bind(this)}>
                                 <option disabled>--Seleccione una opcion--</option>
-                                <option value="pokemon">Pokemon</option>
+                                <option value="pokemon">Pokemones</option>
                                 <option value="berry">Bayas</option>
                                 <option value="contest-type">Concursos</option>
                                 <option value="encounter-method">Encuentros</option>
@@ -96,7 +102,7 @@ export const PokeDex = () => {
                         <div className="col-12 col-md-6">
                             <div className="input-group mb-3">
                                 <input type="text" className="form-control" placeholder='Buscar elemento' aria-label="Search" aria-describedby="Search" onChange={_handleChangeSearch.bind(this)}/>
-                                <button className="btn btn-outline-success" type="button" id="searchToType" onClick={_handleClick}>Buscar</button>
+                                <button className="btn btn-outline-success" type="button" id="searchToType" onClick={_handleClick}>{search === '' ? 'Buscar en intervalos de 10' : 'Buscar'}</button>
                             </div>
                         </div>
                     </div>

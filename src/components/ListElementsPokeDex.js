@@ -1,9 +1,10 @@
 import React, {useState} from 'react';
-import PokeDexElement from "./PokeDexElement";
+import PokeDexElementPokemon from "./PokeDexElementPokemon";
+import PokeDexElementBerry from "./PokeDexElementBerry";
 
 export const ListElementsPokeDex = ({element, data}) => {
     const [names] = useState({
-        pokemon: 'Pokemon',
+        pokemon: 'Pokemones',
         berry: 'Bayas',
         contest_type: 'Concursos',
         encounter_method: 'Encuentros',
@@ -23,7 +24,8 @@ export const ListElementsPokeDex = ({element, data}) => {
                 </div>
                 <div className="col-12">
                     <div className="row">
-                        {data.map((elementSelected, index) => <PokeDexElement key={index} name={elementSelected.name.toUpperCase()} urlAPI={elementSelected.url} type={names[element.replace('-','_')]}/>)}
+                        {names[element.replace('-','_')] === 'Pokemones' && data.map((elementSelected, index) => <PokeDexElementPokemon key={index} urlAPI={elementSelected.url} type={names[element.replace('-','_')]}/>)}
+                        {names[element.replace('-','_')] === 'Bayas' && data.map((elementSelected, index) => <PokeDexElementBerry key={index} urlAPI={elementSelected.url} type={names[element.replace('-','_')]}/>)}
                     </div>
                 </div>
             </div>

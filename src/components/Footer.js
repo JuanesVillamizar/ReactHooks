@@ -13,18 +13,6 @@ export const Footer = () => {
                             <div style={{backgroundColor: '#f0f0f0'}} className='text-center' id='text'>
                                 <Text />
                             </div>
-                        {/*<hr />*/}
-                        {/*<h3 >*/}
-                        {/*    <span className="text-danger">O</span><span className="text-warning">N</span>*/}
-                        {/*    <span className="text-success">E</span><span> </span>*/}
-                        {/*    <span className="text-dark">D</span><span className="text-info">R</span>*/}
-                        {/*    <span className="text-primary">E</span><span className="text-secondary">A</span*/}
-                        {/*    ><span className="text-danger">M</span><span> </span>*/}
-                        {/*    <span className="text-warning">O</span><span className="text-success">N</span>*/}
-                        {/*    <span className="text-dark">E</span><span> </span>*/}
-                        {/*    <span className="text-info">W</span><span className="text-primary">I</span>*/}
-                        {/*    <span className="text-secondary">S</span><span className="text-danger">H</span>*/}
-                        {/*</h3>*/}
                         <hr />
                         <div className="row justify-content-center">
                             <h5>Si quieres cumplirlo sube a la cima</h5>
